@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useContext, FunctionComponent, CSSProperties, useReducer} from 'react';
-import CSS from 'csstype';
+import * as React  from 'react';
+import  * as CSS from 'csstype';
 
 interface GridProps {
     children?:any;
@@ -17,7 +17,7 @@ interface GridProps {
 }
 const GridThemeContext = React.createContext({columnSpacing: 0,rowSpacing: 0});
 
-export const Grid: FunctionComponent<GridProps> = ({
+export const Grid: React.FunctionComponent<GridProps> = ({
     children,
     direction,
     wrap,
@@ -50,7 +50,7 @@ export const Grid: FunctionComponent<GridProps> = ({
         className={className}
         id={id}
         >
-        <GridThemeContext.Provider value={grid_theme}>
+        <GridThemeContext.Provider value={grid_theme} {...events}>
             {children}
         </GridThemeContext.Provider>
         
@@ -67,14 +67,13 @@ interface GridItemProps {
     grow?:number;
     px?:number;
     py?:number;
-    style?:CSSProperties;
+    style?:React.CSSProperties;
     events?:any;
     id?:string;
     className?:string;
-    ref?:any;
 }
 
-export const GridItem: FunctionComponent<GridItemProps> = ({
+export const GridItem: React.FunctionComponent<GridItemProps> = ({
     children,
     span=12,
     basis=12,
@@ -86,15 +85,8 @@ export const GridItem: FunctionComponent<GridItemProps> = ({
     events,
     id,
     className,
-    ref,
 }) => {
-    const {columnSpacing, rowSpacing} = useContext(GridThemeContext);
-    const flex = {
-        span,
-        basis,
-        shrink,
-        grow
-    };
+    const {columnSpacing, rowSpacing} = React.useContext(GridThemeContext);
     const _style:any = {
         padding: `${py}px ${px}px`,
         ...style,

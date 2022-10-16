@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Grid, GridItem} from './layout/grid'
 import {useMediaQueryValue} from './hooks/useMediaQuery'

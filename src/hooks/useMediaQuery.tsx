@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 
 const watch = (query:string) => {return window.matchMedia(query)}
 const mapToObject = (arr:any[], transform:(value:any)=>any) => arr.reduce((a,b)=> (a[b]=transform(b),a),{});
@@ -16,9 +16,7 @@ type Watcher = {
     breakpoint: Breakpoint
 }
 const getInitialBreakpoint = (reduced:Watcher, curr:Watcher): Watcher => curr.watcher.matches ? curr : reduced;
-interface Watchers {
-    [key:string]: MediaQueryList
-}
+
 interface Listeners {
     [key:string]: () => void
 }
@@ -28,7 +26,7 @@ interface QueryValues {
 interface MediaQueries {
     [key:string]: string
 }
-const unknownBreakpoint:Breakpoint = "?"
+
 /**
  * Returns a value depending on the width of the screen.
  * @param queryValues 
